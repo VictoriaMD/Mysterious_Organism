@@ -13,8 +13,26 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
+const pAequorFactory = (number, arr) => {
+ return {
+    specimen: number,
+    dna: arr,
+    mutate() {
+      let dnaArray = this.dna;
+      const dnaBases = dnaArray.filter((item, index) => dnaArray.indexOf(item) === index);
+      const filteredBases = dnaBases.filter(element => element !== this.dna[0]);
+      const newValue = Math.floor(Math.random() * filteredBases.length);
+      const newBase = filteredBases[newValue];
+      dnaArray.splice(0, 1, newBase);
+     console.log(dnaBases, newBase, dnaArray);
+      } 
+   }   
+   //console.log(this.dna);
+}    
 
-
+const test = pAequorFactory(1, mockUpStrand());
+console.log(test);
+console.log(test.mutate());
 
 
 
