@@ -13,6 +13,7 @@ const mockUpStrand = () => {
   return newStrand;
 };
 
+// Returns a new object with arrays and methods
 const pAequorFactory = (number, arr) => {
  return {
     specimen: number,
@@ -24,15 +25,38 @@ const pAequorFactory = (number, arr) => {
       const newValue = Math.floor(Math.random() * filteredBases.length);
       const newBase = filteredBases[newValue];
       dnaArray.splice(0, 1, newBase);
-     console.log(dnaBases, newBase, dnaArray);
-      } 
+      return dnaArray;
+      }, 
+    willLikelySurvive() {
+        let dnaArray = this.dna;
+        if(dnaArray[0] === 'C' || dnaArray[0] === 'G') {
+          return true;
+        } else {
+          return false;
+        }
+      }
    }   
-   //console.log(this.dna);
 }    
 
-const test = pAequorFactory(1, mockUpStrand());
-console.log(test);
-console.log(test.mutate());
+// Returns an array of objects that meet requirements of a pAequorFactory method
+const survivorsArray = survivingOrganisms => {
+ let organism = [];
+ let i = 0;
+ survivingOrganisms = [];
+ while (i < 30) {
+   organism[i] = pAequorFactory(i+1, mockUpStrand());
+   if(organism[i].willLikelySurvive()) {
+   survivingOrganisms.push(organism[i]);
+   i++;
+   }
+  }
+  return survivingOrganisms;
+}
+  
+console.log(survivorsArray());
+
+
+
 
 
 
